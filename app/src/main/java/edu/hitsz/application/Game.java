@@ -33,7 +33,7 @@ import androidx.annotation.NonNull;
 /**
  * 游戏主面板，游戏启动
  *
- * @author hitsz
+ * @author Hogan
  */
 public abstract class Game extends SurfaceView implements SurfaceHolder.Callback,Runnable {
 
@@ -47,7 +47,7 @@ public abstract class Game extends SurfaceView implements SurfaceHolder.Callback
     /**
      * 时间间隔(ms)，控制刷新频率
      */
-    private int timeInterval = 40;
+    private int timeInterval = 20;
 
     public final HeroAircraft heroAircraft;
     public static List<AbstractAircraft> enemyAircrafts;
@@ -86,13 +86,13 @@ public abstract class Game extends SurfaceView implements SurfaceHolder.Callback
     private HashMap<Integer, Integer> soundID = new HashMap<Integer, Integer>();
 
     int shootPeriodFlag = 0;
-    int shootPeriodLimit = 5;
+    int shootPeriodLimit = 3;
     int bossScore = 0;
     private double shootPeriodRate = 0.8;
     private double maxNumberRate = 1.2;
     private double enemyGenerationRate = 0.8;
     int mobGenerationLimit = 5;
-    int eliteGenerationLimit = 20;
+    int eliteGenerationLimit = 8;
     int bossGenerationLimit = 200;
 
     boolean bossGenerationFlag = true;

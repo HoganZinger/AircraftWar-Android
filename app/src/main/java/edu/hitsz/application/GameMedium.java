@@ -6,9 +6,9 @@ import edu.hitsz.MainActivity;
 
 public class GameMedium extends Game{
     private double shootPeriodRate = 0.8;
-    private double maxNumberRate = 1.2;
+    private double maxNumberRate = 2;
     private double enemyGenerationRate = 0.8;
-    private double enemyHpRate = 1.2;
+    private double enemyHpRate = 1.5;
 
     public GameMedium(Context context) {
         super(context);
@@ -38,7 +38,7 @@ public class GameMedium extends Game{
             enemyAircrafts.add(bossFactory.createEnemy(
                     (int) (Math.random() * (MainActivity.screenWidth - ImageManager.MOB_ENEMY_IMAGE.getWidth())) * 1,
                     0,
-                    1,
+                    2,
                     0,
                     bossHp
             ));
@@ -50,7 +50,7 @@ public class GameMedium extends Game{
                         (int) ( Math.random() * (MainActivity.screenWidth - ImageManager.ELITE_ENEMY_IMAGE.getWidth()))*1,
                         (int) (Math.random() * MainActivity.screenHeight * 0.2)*1,
                         Math.random() > 0.3 ? 4 : 0,
-                        4,
+                        8,
                         eliteHp
                 ));
             }

@@ -6,9 +6,9 @@ import edu.hitsz.MainActivity;
 
 public class GameHard extends Game{
     private double shootPeriodRate = 0.8;
-    private double maxNumberRate = 1.2;
-    private double enemyGenerationRate = 0.8;
-    private double enemyHpRate = 1.2;
+    private double maxNumberRate = 3;
+    private double enemyGenerationRate = 0.5;
+    private double enemyHpRate = 2;
 
     public GameHard(Context context) {
         super(context);
@@ -40,7 +40,7 @@ public class GameHard extends Game{
             enemyAircrafts.add(bossFactory.createEnemy(
                     (int) (Math.random() * (MainActivity.screenWidth - ImageManager.MOB_ENEMY_IMAGE.getWidth())) * 1,
                     0,
-                    1,
+                    4,
                     0,
                     bossHp
             ));
@@ -52,7 +52,7 @@ public class GameHard extends Game{
                         (int) ( Math.random() * (MainActivity.screenWidth - ImageManager.ELITE_ENEMY_IMAGE.getWidth()))*1,
                         (int) (Math.random() * MainActivity.screenHeight * 0.2)*1,
                         Math.random() > 0.3 ? 4 : 0,
-                        4,
+                        10,
                         200
                 ));
             }
@@ -65,7 +65,7 @@ public class GameHard extends Game{
                         (int) ( Math.random() * (MainActivity.screenWidth - ImageManager.MOB_ENEMY_IMAGE.getWidth()))*1,
                         (int) (Math.random() * MainActivity.screenHeight * 0.2)*1,
                         0,
-                        10,
+                        15,
                         100
                 ));
             }
