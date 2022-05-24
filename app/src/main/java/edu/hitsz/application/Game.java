@@ -144,7 +144,7 @@ public abstract class Game extends SurfaceView implements SurfaceHolder.Callback
     @Override
     public void run() {
         //设置一个循环来绘制，通过标志位来控制开启绘制还是停止
-        while (mbLoop){
+        while (!gameOverFlag){
             synchronized (mSurfaceHolder){
                 draw();
             }
