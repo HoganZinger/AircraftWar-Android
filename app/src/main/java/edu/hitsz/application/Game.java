@@ -5,9 +5,6 @@ import edu.hitsz.R;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
-import edu.hitsz.dao.Player;
-import edu.hitsz.dao.PlayerDAO;
-import edu.hitsz.dao.PlayerDAOImpl;
 import edu.hitsz.factory.*;
 import edu.hitsz.item.AbstractItem;
 
@@ -21,10 +18,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
-import android.provider.MediaStore;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 

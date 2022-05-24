@@ -47,12 +47,12 @@ public class MainActivity extends AppCompatActivity {
         Intent prevIntent = getIntent();
         getScreenHW();
         loadImg();
+//        startActivity(new Intent(MainActivity.this, LogInActivity.class))
         switch(prevIntent.getIntExtra("diff", 1)) {
             case 0:
                 ImageManager.BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(), R.drawable.bg);
                 bgmFlag = prevIntent.getBooleanExtra("audio", false);
                 vGame = new GameEasy(this);
-                System.out.println("EasyMode");
                 break;
             case 1:
                 ImageManager.BACKGROUND_IMAGE = BitmapFactory.decodeResource(getResources(), R.drawable.bg2);

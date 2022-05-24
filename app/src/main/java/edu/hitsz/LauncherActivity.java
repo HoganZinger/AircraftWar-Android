@@ -4,11 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
