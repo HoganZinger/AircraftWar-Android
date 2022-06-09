@@ -24,6 +24,13 @@
             android:theme="@style/Theme.AircraftWarAndroid.NoActionBar">
 
         </activity>
+        <activity
+            android:name=".RankingListActivity"
+            android:exported="true"
+            android:label="@string/title_activity_launcher"
+            android:theme="@style/Theme.AircraftWarAndroid.NoActionBar">
+
+        </activity>
 
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".MainActivity"

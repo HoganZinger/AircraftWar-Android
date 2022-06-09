@@ -16,6 +16,9 @@ public class Player implements Serializable {
         dateTime = LocalDateTime.now();
     }
 
+    public int getPlayerID(){
+        return playerID;
+    }
     public int getScore() {
         return score;
     }

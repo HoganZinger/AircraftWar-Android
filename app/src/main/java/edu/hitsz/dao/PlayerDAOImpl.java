@@ -1,20 +1,27 @@
 package edu.hitsz.dao;
 
+import android.app.Activity;
+import android.content.Context;
+
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
 public class PlayerDAOImpl implements PlayerDAO{
     private static List<Player> playerList = new LinkedList<>();
+    public Activity act;
+    public PlayerDAOImpl(Activity act){
+        this.act = act;
+    }
 
-    public List<Player> getPlayerList() {
+    public static List<Player> getPlayerList() {
         return playerList;
     }
 
     public void readPlayerList() {
         playerList.clear();
         try {
-            FileInputStream fis = new FileInputStream("player.dat");
+            FileInputStream fis = act.openFileInput("player.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);
             while (true) {
                 Player player = (Player) ois.readObject();
@@ -49,7 +56,7 @@ public class PlayerDAOImpl implements PlayerDAO{
 
     public void savePlayerList() {
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("player.dat"));
+            ObjectOutputStream oos = new ObjectOutputStream(act.openFileOutput("player.dat", Context.MODE_PRIVATE));
             for(Player player: playerList) {
                 oos.writeObject(player);
             }

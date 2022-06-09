@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity {
         System.out.println("Game Activity has been created.");
         setContentView(vGame);
         vGame.action();
+//        if (vGame.isGameOverFlag()){
+//            startActivity(new Intent(this, RankingListActivity.class));
+//        }
     }
 
     @Override

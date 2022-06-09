@@ -57,6 +57,7 @@ public class LauncherActivity extends AppCompatActivity {
                 }
                 startGame.putExtra("audio", audioSwitch.isChecked());
                 startActivity(startGame);
+
             }
         });
         DrawerLayout drawer = binding.drawerLayout;
@@ -70,6 +71,8 @@ public class LauncherActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_launcher);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
     }
 
     @Override

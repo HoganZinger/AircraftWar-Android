@@ -2,17 +2,24 @@ package edu.hitsz.application;
 
 import edu.hitsz.MainActivity;
 import edu.hitsz.R;
+import edu.hitsz.RankingListActivity;
 import edu.hitsz.aircraft.*;
 import edu.hitsz.bullet.BaseBullet;
 import edu.hitsz.basic.AbstractFlyingObject;
+import edu.hitsz.dao.Player;
+import edu.hitsz.dao.PlayerDAOImpl;
 import edu.hitsz.factory.*;
 import edu.hitsz.item.AbstractItem;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.List;
 import java.util.concurrent.*;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -96,9 +103,13 @@ public abstract class Game extends SurfaceView implements SurfaceHolder.Callback
     private SurfaceHolder mSurfaceHolder;
     private Canvas canvas;  //绘图的画布
     private Paint mPaint;
+    private Context context;
+    private PlayerDAOImpl playerDAO;
+    private Player player;
 
     public Game(Context context) {
         super(context);
+        this.context = context;
         bgmPlayer = MediaPlayer.create(context, R.raw.bgm);
         bossBgmPlayer = MediaPlayer.create(context, R.raw.bgm_boss);
         mSoundPool = new SoundPool(4, AudioManager.STREAM_SYSTEM, 5);
@@ -112,6 +123,10 @@ public abstract class Game extends SurfaceView implements SurfaceHolder.Callback
         mSurfaceHolder = this.getHolder();
         mSurfaceHolder.addCallback(this);
         this.setFocusable(true);
+        // TODO: 2022/5/31 游戏开始时需要读写数据，将数据写到Playerlist中
+
+        playerDAO = new PlayerDAOImpl((Activity) context);
+        playerDAO.readPlayerList();
 
         heroAircraft = HeroAircraft.getInstance();
         heroAircraft.setStatus(
@@ -178,6 +193,7 @@ public abstract class Game extends SurfaceView implements SurfaceHolder.Callback
 
     public void playGameOver(){
         mSoundPool.play(soundID.get(2), 1, 1, 0, 0, 1);
+        playerDAO.addPlayer("abc", score);
     }
 
     public void playBulletHit() {
@@ -191,6 +207,19 @@ public abstract class Game extends SurfaceView implements SurfaceHolder.Callback
     public void playGetSupply() {
         mSoundPool.play(soundID.get(5), 1, 1, 0, 0, 1);
     }
+
+    public boolean isGameOverFlag() {
+        return gameOverFlag;
+    }
+
+    // TODO: 2022/5/31 PlayerDao改一下，用户交互这里需要大改
+//    private Player setPlayer(){
+//        LocalDateTime now = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+//        String playerName = JOptionPane.showInputDialog(null, "这局游戏结束啦，你的得分为" + score + "\n请输入名字记录得分","输入",JOptionPane.PLAIN_MESSAGE);
+//        player = new Player(playersRank.getPlayers().size() + 1, playerName, score, now.format(formatter));
+//        return player;
+//    }
 
     /**
      * 游戏启动入口，执行游戏逻辑
@@ -236,12 +265,14 @@ public abstract class Game extends SurfaceView implements SurfaceHolder.Callback
                 if(MainActivity.bgmFlag) {
                     stopMusic(bgmPlayer);
                     stopMusic(bossBgmPlayer);
-                    playGameOver();
-                }
 
+                }
+                playGameOver();
                 executorService.shutdown();
                 gameOverFlag = true;
                 System.out.println("Game Over!");
+
+                context.startActivity(new Intent((MainActivity)context, RankingListActivity.class));
             }
         };
 
